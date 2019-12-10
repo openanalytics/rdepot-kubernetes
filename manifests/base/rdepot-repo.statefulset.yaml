@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rdepot-repo
+spec:
+  selector:
+    matchLabels:
+      app: rdepot-repo
+  serviceName: rdepot-repo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rdepot-repo
+    spec:
+      nodeSelector:
+        failure-domain.beta.kubernetes.io/zone: eu-west-1a
+      containers:
+      - name: rdepot-repo
+        image: openanalytics/rdepot-repo:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: repository
+          mountPath: /opt/rdepot
+      - name: rdepot-repo-proxy
+        image: library/nginx:alpine
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+        - name: config-volume
+          mountPath: /etc/nginx/sites-enabled/rdepot
+          subPath: sites-enabled-rdepot
+        - name: repository
+          mountPath: /opt/rdepot/repo
+          readOnly: true
+        - name: secret-volume
+          mountPath: /etc/nginx/.htpasswd
+          subPath: .htpasswd
+      volumes:
+      - name: config-volume
+        configMap:
+          name: rdepot-repo
+      - name: secret-volume
+        secret:
+          secretName: rdepot-repo-auth
+ 

@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- rdepot-app.deployment.yaml
+- rdepot-repo.statefulset.yaml
+- rdepot-app.configmap.yaml
+- rdepot-app.service.yaml
+- rdepot-repo.configmap.yaml
+- rdepot-repo.service.yaml
+- rdepot-db-init.job.yaml
+
+configMapGenerator:
+- files:
+  - rdepot.sql
+  name: rdepot-db-init
+
+namespace: rdepot
