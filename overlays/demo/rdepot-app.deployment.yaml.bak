@@ -20,6 +20,25 @@ spec:
         - name: LDAP_TLS
           value: 'false'
 
+      - name: rdepot-db
+        image: library/postgres:alpine
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: rdepot-db-credentials
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rdepot-db-credentials
+              key: password
+
+        volumeMounts:
+        - name: db-init-config
+          mountPath: /docker-entrypoint-initdb.d/rdepot.sql
+          subPath: rdepot.sql
+
       - name: rdepot-app
         ports:
         - containerPort: 8080
@@ -44,12 +63,10 @@ spec:
           value: description
         - name: LDAP_DEFAULT_ADMINS
           value: admin
-
+        # - name: DB_URL
+        # value: jdbc:postgresql://bayer-aph-np-metadb.cluster-c9lrs01o9uru.eu-west-1.rds.amazonaws.com:5432/rdepot
         - name: DB_URL
-          valueFrom:
-            secretKeyRef:
-              name: rdepot-db-credentials
-              key: url
+          value: jdbc:postgresql://localhost:5432/postgres
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
@@ -65,4 +82,8 @@ spec:
       - name: app-config
         configMap:
           name: rdepot-app
+
+      - name: db-init-config
+        configMap:
+          name: rdepot-db-init
 

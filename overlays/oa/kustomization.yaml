@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base/app-stateful
+- ssh://github.com/openanalytics/oa-k8s-base.git//postgresql
+
+patchesStrategicMerge:
+- rdepot-app.statefulset.yaml
+
+configMapGenerator:
+- files:
+  - repositories.sql
+  name: rdepot-init-repositories
+
+namespace: rdepot-dev

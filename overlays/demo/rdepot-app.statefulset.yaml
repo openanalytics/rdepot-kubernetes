@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Statefulset
+metadata:
+  name: rdepot-app
+spec:
+  template:
+    spec:
+      containers:
+      - name: ldap
+        image: osixia/openldap
+        imagePullPolicy: Always
+        env:
+        - name: LDAP_TLS
+          value: 'false'
+
+      - name: rdepot-app
+        env:
+        - name: LDAP_URL
+          value: ldap://localhost:389
+        - name: LDAP_BASEDN
+          value: dc=example,dc=org
+        - name: LDAP_USEROU
+          value: ""
+        - name: LDAP_LOGINFIELD
+          value: cn
+        - name: LDAP_NAMEFIELD
+          value: description
+        - name: LDAP_DEFAULT_ADMINS
+          value: admin
+

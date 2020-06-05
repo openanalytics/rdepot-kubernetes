@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rdepot-repo
+spec:
+  template:
+    spec:
+      nodeSelector:
+        failure-domain.beta.kubernetes.io/zone: eu-west-1a
+ 
