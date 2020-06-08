@@ -4,6 +4,6 @@
 ## base recipe
 
 ```
-kustomize build manifests/base
+kustomize build base
 ```
 
