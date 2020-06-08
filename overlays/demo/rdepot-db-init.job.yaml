@@ -10,11 +10,24 @@ spec:
       - name: rdepot-db-init
         image: jbergknoff/postgresql-client
         command: ["psql", "--no-password", "--file=/tmp/rdepot.sql"]
+        env:
+        - name: PGPASSFILE
+          value: /tmp/pgpass/.pgpass
         volumeMounts:
+        - name: pgpassfile
+          mountPath: "/tmp/pgpass"
+          readOnly: true
         - name: init-script
           mountPath: "/tmp/rdepot.sql"
           subPath: rdepot.sql
       volumes:
+      - name: pgpassfile
+        secret:
+          secretName: rdepot-db-credentials
+          items:
+          - key: pgpassfile
+            mode: 0600
+            path: .pgpass
       - name: init-script
         configMap:
           name: rdepot-db-init
