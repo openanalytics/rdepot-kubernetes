@@ -37,20 +37,11 @@ spec:
         - name: LDAP_DEFAULT_ADMINS
           value: admin
         - name: DB_URL
-          valueFrom:
-            secretKeyRef:
-              name: rdepot-db-credentials
-              key: url
+          value: ""
         - name: DB_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: rdepot-db-credentials
-              key: username
+          value: ""
         - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: rdepot-db-credentials
-              key: password
+          value: ""
       volumes:
       - name: app-config
         configMap:
