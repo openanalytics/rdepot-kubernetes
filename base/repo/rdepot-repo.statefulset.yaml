@@ -49,11 +49,11 @@ spec:
       - name: secret-volume
         secret:
           secretName: rdepot-repo-auth
-      volumeClaimTemplates:
-      - metadata:
-          name: repository
-        spec:
-          accessModes: [ "ReadWriteOnce" ]
-          emptyDir: {}
+    volumeClaimTemplates:
+    - metadata:
+        name: repository
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        emptyDir: {}
 
  
