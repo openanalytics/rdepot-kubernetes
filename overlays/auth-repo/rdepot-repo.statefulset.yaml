@@ -37,10 +37,16 @@ spec:
         - name: repository
           mountPath: /opt/rdepot/repo
           readOnly: true
+        - name: secret-volume
+          mountPath: /etc/nginx/.htpasswd
+          subPath: .htpasswd
       volumes:
       - name: config-volume
         configMap:
           name: rdepot-repo
+      - name: secret-volume
+        secret:
+          secretName: rdepot-repo-auth
       - name: repository
         emptyDir: {}
  
