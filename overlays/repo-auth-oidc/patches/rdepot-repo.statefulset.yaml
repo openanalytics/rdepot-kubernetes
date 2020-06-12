@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: gatekeeper
-          image: keycloak-gatekeeper:7.0.0
+          image: keycloak/keycloak-gatekeeper:7.0.0
           args:
             - --config=/etc/secrets/gatekeeper.yaml
           ports:
