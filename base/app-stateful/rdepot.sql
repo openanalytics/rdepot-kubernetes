@@ -1,7 +1,7 @@
 /**
  * R Depot
  *
- * Copyright (C) 2012-2019 Open Analytics NV
+ * Copyright (C) 2012-2020 Open Analytics NV
  *
  * ===========================================================================
  *
@@ -127,7 +127,7 @@ SET default_with_oids = false;
 CREATE TABLE package_maintainer (
     id integer NOT NULL,
     user_id integer NOT NULL,
-    package character varying(255) NOT NULL,
+    package text NOT NULL,
     repository_id integer NOT NULL,
     deleted boolean DEFAULT false NOT NULL
 );
@@ -162,24 +162,23 @@ ALTER SEQUENCE "PackageMaintainer_id_seq" OWNED BY package_maintainer.id;
 
 CREATE TABLE package (
     id integer NOT NULL,
-    name character varying(255) NOT NULL,
-    version character varying(255) NOT NULL,
+    name text NOT NULL,
+    version text NOT NULL,
     description text NOT NULL,
-    author character varying(255) NOT NULL,
+    author text NOT NULL,
     maintainer_id integer NOT NULL,
     repository_id integer NOT NULL,
-    depends character varying(255),
-    imports character varying(2000),
-    suggests character varying(255),
-    system_requirements character varying(255),
-    license character varying(255) NOT NULL,
-    url character varying(255),
-    source character varying(255) NOT NULL,
-    title character varying(255) NOT NULL,
+    depends text,
+    imports text,
+    suggests text,
+    system_requirements text,
+    license text NOT NULL,
+    url text,
+    source text NOT NULL,
+    title text NOT NULL,
     active boolean DEFAULT false NOT NULL,
-    accepted boolean DEFAULT false NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    md5sum character varying(32)
+    md5sum text
 );
 
 
@@ -276,9 +275,9 @@ ALTER SEQUENCE "RepositoryMaintainer_id_seq" OWNED BY repository_maintainer.id;
 CREATE TABLE repository (
     version integer DEFAULT 0 NOT NULL,
     id integer NOT NULL,
-    publication_uri character varying(255) NOT NULL,
-    name character varying(255) NOT NULL,
-    server_address character varying(255) NOT NULL,
+    publication_uri text NOT NULL,
+    name text NOT NULL,
+    server_address text NOT NULL,
     published boolean DEFAULT false NOT NULL,
     deleted boolean DEFAULT false NOT NULL
 );
@@ -314,8 +313,8 @@ ALTER SEQUENCE "Repository_id_seq" OWNED BY repository.id;
 CREATE TABLE role (
     id integer NOT NULL,
     value integer NOT NULL,
-    name character varying(255) NOT NULL,
-    description character varying(255) NOT NULL
+    name text NOT NULL,
+    description text NOT NULL
 );
 
 
@@ -363,7 +362,7 @@ CREATE TABLE submission (
     id integer NOT NULL,
     submitter_id integer NOT NULL,
     package_id integer NOT NULL,
-    changes character varying(255),
+    changes text,
     accepted boolean DEFAULT false NOT NULL,
     deleted boolean DEFAULT false NOT NULL
 );
@@ -412,9 +411,9 @@ CREATE SEQUENCE "UserEvent_id_seq"
 CREATE TABLE "user" (
     id integer NOT NULL,
     role_id integer DEFAULT 4 NOT NULL,
-    name character varying(255) NOT NULL,
-    email character varying(255) NOT NULL,
-    login character varying(255) NOT NULL,
+    name text NOT NULL,
+    email text NOT NULL,
+    login text NOT NULL,
     active boolean NOT NULL,
     last_logged_in_on date,
     deleted boolean DEFAULT false NOT NULL
@@ -464,9 +463,9 @@ CREATE TABLE package_event (
     date date DEFAULT ('now'::text)::date NOT NULL,
     package_id integer NOT NULL,
     event_id integer NOT NULL,
-    changed_variable character varying(255) NOT NULL,
-    value_before character varying(255) NOT NULL,
-    value_after character varying(255) NOT NULL,
+    changed_variable text NOT NULL,
+    value_before text NOT NULL,
+    value_after text NOT NULL,
     changed_by integer NOT NULL,
     "time" time with time zone DEFAULT now()
 );
@@ -482,9 +481,9 @@ CREATE TABLE package_maintainer_event (
     date date DEFAULT ('now'::text)::date NOT NULL,
     package_maintainer_id integer NOT NULL,
     event_id integer NOT NULL,
-    changed_variable character varying(255) NOT NULL,
-    value_before character varying(255) NOT NULL,
-    value_after character varying(255) NOT NULL,
+    changed_variable text NOT NULL,
+    value_before text NOT NULL,
+    value_after text NOT NULL,
     changed_by integer NOT NULL,
     "time" time with time zone DEFAULT now()
 );
@@ -500,9 +499,9 @@ CREATE TABLE repository_event (
     date date DEFAULT ('now'::text)::date NOT NULL,
     repository_id integer NOT NULL,
     event_id integer NOT NULL,
-    changed_variable character varying(255) NOT NULL,
-    value_before character varying(255) NOT NULL,
-    value_after character varying(255) NOT NULL,
+    changed_variable text NOT NULL,
+    value_before text NOT NULL,
+    value_after text NOT NULL,
     changed_by integer NOT NULL,
     "time" time with time zone DEFAULT now()
 );
@@ -518,9 +517,9 @@ CREATE TABLE repository_maintainer_event (
     date date DEFAULT ('now'::text)::date NOT NULL,
     repository_maintainer_id integer NOT NULL,
     event_id integer NOT NULL,
-    changed_variable character varying(255) NOT NULL,
-    value_before character varying(255) NOT NULL,
-    value_after character varying(255) NOT NULL,
+    changed_variable text NOT NULL,
+    value_before text NOT NULL,
+    value_after text NOT NULL,
     changed_by integer NOT NULL,
     "time" time with time zone DEFAULT now()
 );
@@ -536,9 +535,9 @@ CREATE TABLE submission_event (
     date date DEFAULT ('now'::text)::date NOT NULL,
     submission_id integer NOT NULL,
     event_id integer NOT NULL,
-    changed_variable character varying(255) NOT NULL,
-    value_before character varying(255) NOT NULL,
-    value_after character varying(255) NOT NULL,
+    changed_variable text NOT NULL,
+    value_before text NOT NULL,
+    value_after text NOT NULL,
     changed_by integer NOT NULL,
     "time" time with time zone DEFAULT now()
 );
@@ -554,9 +553,9 @@ CREATE TABLE user_event (
     date date DEFAULT ('now'::text)::date NOT NULL,
     user_id integer NOT NULL,
     event_id integer NOT NULL,
-    changed_variable character varying(255) NOT NULL,
-    value_before character varying(255) NOT NULL,
-    value_after character varying(255) NOT NULL,
+    changed_variable text NOT NULL,
+    value_before text NOT NULL,
+    value_after text NOT NULL,
     changed_by integer NOT NULL,
     "time" time with time zone DEFAULT now()
 );
