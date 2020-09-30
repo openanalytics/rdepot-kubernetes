@@ -6,6 +6,10 @@ spec:
   template:
     spec:
       restartPolicy: Never
+      initContainers:
+        - name: wait-for-postgresql
+          image: busybox
+          command: [ "sh", "-c", "until nc postgresql 5432; do echo waiting for postgresql; sleep 2; done;"]
       containers:
       - name: rdepot-db-init
         image: jbergknoff/postgresql-client
