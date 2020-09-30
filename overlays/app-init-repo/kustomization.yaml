@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
   - ../../base/app-stateful
-  - ../../base/repo
 
 patchesStrategicMerge:
   - patches/rdepot-app.statefulset.yaml
