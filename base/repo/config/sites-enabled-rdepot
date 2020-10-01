@@ -1,0 +1,16 @@
+server {
+  listen                80;
+  server_name           _;
+
+  location /repo/ {
+    root /opt/rdepot;
+
+    satisfy any;
+
+    access_log          /var/log/nginx/repo.access.log;
+    error_log           /var/log/nginx/repo.error.log;
+    autoindex on;
+  }
+  
+}
+

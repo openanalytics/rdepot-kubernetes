@@ -42,8 +42,8 @@ spec:
               value: ""
             - name: DB_PASSWORD
               value: ""
-        volumes:
-          - name: app-config
-            configMap:
-              name: rdepot-app
+      volumes:
+        - name: app-config
+          configMap:
+            name: rdepot-app
 

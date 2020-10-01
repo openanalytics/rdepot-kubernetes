@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: rdepot-app
-data:
-  rdepot.conf: |
-    export JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8001,suspend=y"
-

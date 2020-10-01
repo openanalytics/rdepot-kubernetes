@@ -1,0 +1,12 @@
+app:
+  authentication: simple
+    users:
+      - login: einstein
+        password: password
+      - login: tesla
+        password: password
+      - login: galileo
+        password: password
+      - login: newton
+        password: password
+
