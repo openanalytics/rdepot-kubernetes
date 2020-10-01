@@ -12,7 +12,7 @@ configMapGenerator:
   - files:
       - config/application.yml
       - config/authentication.yml
-    name: rdepot-config
+    name: rdepot-app
 
 namespace: rdepot
 

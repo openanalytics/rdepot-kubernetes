@@ -17,25 +17,29 @@ spec:
         - name: rdepot-app
           ports:
             - containerPort: 8080
+              name: web
           image: openanalytics/rdepot-app:1.4.0
           imagePullPolicy: Always
           volumeMounts:
             - name: app-config
-              mountPath: /opt/rdepot/rdepot.conf
-              subPath: rdepot.conf
+              mountPath: /opt/rdepot/application.yml
+              subPath: application.yml
+            - name: app-config
+              mountPath: /opt/rdepot/authentication.yml
+              subPath: authentication.yml
           env:
-            - name: LDAP_URL
-              value: ldap://localhost:389
-            - name: LDAP_BASEDN
-              value: dc=example,dc=org
-            - name: LDAP_USEROU
-              value: ""
-            - name: LDAP_LOGINFIELD
-              value: cn
-            - name: LDAP_NAMEFIELD
-              value: description
-            - name: LDAP_DEFAULT_ADMINS
-              value: admin
+#            - name: LDAP_URL
+#              value: ldap://localhost:389
+#            - name: LDAP_BASEDN
+#              value: dc=example,dc=org
+#            - name: LDAP_USEROU
+#              value: ""
+#            - name: LDAP_LOGINFIELD
+#              value: cn
+#            - name: LDAP_NAMEFIELD
+#              value: description
+#            - name: LDAP_DEFAULT_ADMINS
+#              value: admin
             - name: DB_URL
               value: ""
             - name: DB_USERNAME
