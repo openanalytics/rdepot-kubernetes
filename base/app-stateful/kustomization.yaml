@@ -12,3 +12,4 @@ configMapGenerator:
   name: rdepot-db-init
 
 namespace: rdepot
+
