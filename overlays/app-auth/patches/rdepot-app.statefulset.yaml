@@ -14,5 +14,5 @@ spec:
       volumes:
         - name: app-config-auth
           secret:
-            name: repo-app-auth
+            name: rdepot-app-auth
 
