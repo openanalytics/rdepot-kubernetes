@@ -1,19 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Statefulset
 metadata:
   name: rdepot-app
 spec:
-  selector:
-    matchLabels:
-      app: rdepot-app
-  replicas: 1
   template:
-    metadata:
-      labels:
-        app: rdepot-app
     spec:
       containers:
-
       - name: rdepot-db
         image: library/postgres:alpine
         env:
@@ -28,25 +20,8 @@ spec:
               name: rdepot-db-credentials
               key: password
 
-        volumeMounts:
-        - name: db-init-config
-          mountPath: /docker-entrypoint-initdb.d/rdepot.sql
-          subPath: rdepot.sql
-
       - name: rdepot-app
-        ports:
-        - containerPort: 8080
-
-        image: openanalytics/rdepot-app:latest
-        imagePullPolicy: Always
-        volumeMounts:
-        - name: app-config
-          mountPath: /opt/rdepot/rdepot.conf
-          subPath: rdepot.conf
-
         env:
-        # - name: DB_URL
-        # value: jdbc:postgresql://bayer-aph-np-metadb.cluster-c9lrs01o9uru.eu-west-1.rds.amazonaws.com:5432/rdepot
         - name: DB_URL
           value: jdbc:postgresql://localhost:5432/postgres
         - name: DB_USERNAME
@@ -59,9 +34,4 @@ spec:
             secretKeyRef:
               name: rdepot-db-credentials
               key: password
-
-      volumes:
-      - name: db-init-config
-        configMap:
-          name: rdepot-db-init
 
