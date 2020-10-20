@@ -13,5 +13,3 @@ configMapGenerator:
       - config/application.yml
     name: rdepot-app
 
-namespace: rdepot
-

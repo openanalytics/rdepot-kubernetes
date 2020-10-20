@@ -10,5 +10,3 @@ configMapGenerator:
       - config/nginx.conf
     name: rdepot-repo
 
-namespace: rdepot
-
