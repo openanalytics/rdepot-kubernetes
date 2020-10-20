@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rdepot-app
+spec:
+  template:
+    spec:
+      containers:
+        - name: rdepot-app
+          volumeMounts:
+            - name: app-config-auth
+              mountPath: /opt/rdepot/authentication.yml
+              subPath: authentication.yml
+      volumes:
+        - name: app-config-auth
+          secret:
+            name: repo-app-auth
+
