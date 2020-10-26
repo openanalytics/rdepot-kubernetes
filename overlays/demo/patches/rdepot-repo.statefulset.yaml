@@ -3,6 +3,17 @@ kind: StatefulSet
 metadata: 
   name: rdepot-repo
 spec:
+  template:
+    spec:
+      initContainers:
+      # this will be no longer be necessary in 1.4.1
+      - name: init-repository
+        image: busybox
+        command: [ "mkdir" ]
+        args: [ "-p", "/opt/rdepot/demo", "-m", "777" ]
+        volumeMounts:
+        - name: repository
+          mountPath: /opt/rdepot
   volumeClaimTemplates:
     - metadata:
         name: repository

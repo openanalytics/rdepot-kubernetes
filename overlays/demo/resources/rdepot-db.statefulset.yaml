@@ -30,4 +30,16 @@ spec:
         ports:
           - name: tcp-postgresql
             containerPort: 5432
+        volumeMounts:
+          - name: data
+            mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+              storage: "1Gi"
+
 
