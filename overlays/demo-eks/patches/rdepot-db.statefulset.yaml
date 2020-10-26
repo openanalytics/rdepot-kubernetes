@@ -5,7 +5,7 @@ metadata:
 spec:
   volumeClaimTemplates:
     - metadata:
-        name: rdepot-db
+        name: data
       spec:
         storageClassName: "gp2"
  
