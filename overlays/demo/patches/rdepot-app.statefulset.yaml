@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rdepot-app
+spec:
+  template:
+    spec:
+      containers:
+      - name: rdepot-app
+        env:
+        - name: DB_URL
+          value: jdbc:postgresql://rdepot-db:5432/postgres
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: rdepot-db-credentials
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rdepot-db-credentials
+              key: password
+        volumeMounts:
+          - name: app-data
+            mountPath: /opt/rdepot/generated
+          - name: app-config
+            mountPath: /opt/rdepot/authentication.yml
+            subPath: authentication.yml
+  volumeClaimTemplates:
+    - metadata:
+        name: app-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+              storage: "1Gi"
+

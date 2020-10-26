@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata: 
+  name: rdepot-repo
+spec:
+  volumeClaimTemplates:
+    - metadata:
+        name: repository
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: "1Gi"
+

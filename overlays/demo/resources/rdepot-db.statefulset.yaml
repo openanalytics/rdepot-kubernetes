@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rdepot-db
+spec:
+  selector:
+    matchLabels:
+      app: rdepot-db
+  serviceName: rdepot-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rdepot-db
+    spec:
+      containers:
+      - name: postgresql
+        image: library/postgres:alpine
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: rdepot-db-credentials
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rdepot-db-credentials
+              key: password
+        ports:
+          - name: tcp-postgresql
+            containerPort: 5432
+

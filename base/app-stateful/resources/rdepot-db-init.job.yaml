@@ -9,7 +9,12 @@ spec:
       initContainers:
         - name: wait-for-postgresql
           image: busybox
-          command: [ "sh", "-c", "until nc postgresql 5432; do echo waiting for postgresql; sleep 2; done;"]
+          command: [ "sh", "-c", "until nc ${PGHOST} ${PGPORT}; do echo waiting for postgresql; sleep 2; done;"]
+          env:
+            - name: PGHOST
+              value: postgresql
+            - name: PGPORT
+              value: "5432"
       containers:
       - name: rdepot-db-init
         image: jbergknoff/postgresql-client

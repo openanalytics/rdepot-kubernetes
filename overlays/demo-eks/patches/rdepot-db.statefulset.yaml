@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rdepot-db
+spec:
+  volumeClaimTemplates:
+    - metadata:
+        name: rdepot-db
+      spec:
+        storageClassName: "gp2"
+ 
