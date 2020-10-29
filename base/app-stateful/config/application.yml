@@ -1,3 +1,6 @@
+api-token:
+  secret: SecretKeyToGenJWTs
+
 message:
   source:
     basename: i18n/messages
