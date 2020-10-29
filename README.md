@@ -8,7 +8,7 @@ Overview:
 ## Versions
 
 Version-tagged images are available on docker hub.
-Images tagged `:latest` are also available, but their use discouraged.
+Images tagged `:latest` are also available, but their use is discouraged.
 
 The kustomizations in this repo are version-locked and are increased in tandem with a repository tag.
 

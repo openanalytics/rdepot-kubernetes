@@ -1,3 +1,6 @@
+
+declarative: false
+
 api-token:
   secret: SecretKeyToGenJWTs
 

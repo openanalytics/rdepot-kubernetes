@@ -1,7 +1,12 @@
+declarative: true
 repositories:
   - name: demo
     publication-uri: http://rdepot-repo/repo/demo
     server-address: http://rdepot-repo:8080/demo
+
+api_token:
+  # generate your own secret
+  secret: Xeekuu1ohnguu4shiethao4Cuonooshu 
 
 message:
   source:
