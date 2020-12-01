@@ -23,6 +23,10 @@ spec:
         volumeMounts:
           - name: app-data
             mountPath: /opt/rdepot/generated
+            subPath: generated
+          - name: app-data
+            mountPath: /opt/rdepot/repositories
+            subPath: repositories
           - name: app-config
             mountPath: /opt/rdepot/authentication.yml
             subPath: authentication.yml
