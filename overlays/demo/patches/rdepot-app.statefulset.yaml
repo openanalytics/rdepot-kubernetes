@@ -9,7 +9,7 @@ spec:
       - name: rdepot-app
         env:
         - name: DB_URL
-          value: jdbc:postgresql://rdepot-db:5432/postgres
+          value: jdbc:postgresql://rdepot-db:5432/rdepot
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
