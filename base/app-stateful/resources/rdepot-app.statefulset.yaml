@@ -18,7 +18,7 @@ spec:
           ports:
             - containerPort: 8080
               name: web
-          image: openanalytics/rdepot-app:1.4.2
+          image: openanalytics/rdepot-app:1.4.3
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: app-config
