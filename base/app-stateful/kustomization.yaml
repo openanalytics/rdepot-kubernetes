@@ -5,6 +5,11 @@ resources:
   - resources/rdepot-app.service.yaml
   - resources/rdepot-db-init.job.yaml
 
+images:
+  - name: rdepot-app
+    newName: openanalytics/rdepot-app
+    newTag: 1.5.0
+
 configMapGenerator:
   - files:
       - config/rdepot.sql

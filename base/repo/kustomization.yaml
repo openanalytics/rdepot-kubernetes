@@ -4,6 +4,11 @@ resources:
 - resources/rdepot-repo.service.yaml
 - resources/rdepot-repo.statefulset.yaml
 
+images:
+  - name: rdepot-repo
+    newName: openanalytics/rdepot-repo
+    newTag: 1.5.0
+
 configMapGenerator:
   - files:
       - config/sites-enabled-rdepot

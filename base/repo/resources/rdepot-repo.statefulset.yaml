@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
       - name: rdepot-repo
-        image: openanalytics/rdepot-repo:1.4.3
-        imagePullPolicy: Always
+        image: rdepot-repo
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
         volumeMounts:
