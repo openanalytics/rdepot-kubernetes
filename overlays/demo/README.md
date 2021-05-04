@@ -22,6 +22,11 @@ kubectl create ns demo-rdepot
 kustomize build . | kubectl apply -f -
 ```
 
+wait until your pods are ready:
+```bash
+kubectl -n demo-rdepot get pods
+```
+
 ## Port-forwarding the services
 
 To forward the Manager app, run

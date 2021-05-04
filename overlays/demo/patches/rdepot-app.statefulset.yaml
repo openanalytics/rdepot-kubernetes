@@ -8,6 +8,18 @@ spec:
       containers:
       - name: rdepot-app
         env:
+        - name: SPRING_LIQUIBASE_URL
+          value: jdbc:postgresql://rdepot-db:5432/rdepot
+        - name: SPRING_LIQUIBASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: rdepot-db-credentials
+              key: username
+        - name: SPRING_LIQUIBASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rdepot-db-credentials
+              key: password
         - name: DB_URL
           value: jdbc:postgresql://rdepot-db:5432/rdepot
         - name: DB_USERNAME
