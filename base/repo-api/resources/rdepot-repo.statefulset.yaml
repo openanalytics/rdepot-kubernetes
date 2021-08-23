@@ -23,9 +23,6 @@ spec:
         - name: repository
           mountPath: /opt/rdepot
       volumes:
-      - name: config-volume
-        configMap:
-          name: rdepot-repo
       - name: repository
         emptyDir: {}
  
