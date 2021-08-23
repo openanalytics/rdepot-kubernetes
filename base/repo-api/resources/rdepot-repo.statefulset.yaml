@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rdepot-repo
+spec:
+  selector:
+    matchLabels:
+      app: rdepot-repo
+  serviceName: rdepot-repo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rdepot-repo
+    spec:
+      containers:
+      - name: rdepot-repo
+        image: rdepot-repo
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: repository
+          mountPath: /opt/rdepot
+      volumes:
+      - name: config-volume
+        configMap:
+          name: rdepot-repo
+      - name: repository
+        emptyDir: {}
+ 
