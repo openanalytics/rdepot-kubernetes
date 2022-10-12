@@ -3,17 +3,13 @@ kind: Kustomization
 resources:
   - resources/rdepot-app.statefulset.yaml
   - resources/rdepot-app.service.yaml
-  - resources/rdepot-db-init.job.yaml
 
 images:
   - name: rdepot-app
     newName: openanalytics/rdepot-app
-    newTag: 1.5.0
+    newTag: 1.6.2
 
 configMapGenerator:
-  - files:
-      - config/rdepot.sql
-    name: rdepot-db-init
   - files:
       - config/application.yml
     name: rdepot-app

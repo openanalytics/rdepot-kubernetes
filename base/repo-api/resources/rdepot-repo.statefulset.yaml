@@ -17,6 +17,10 @@ spec:
       - name: rdepot-repo
         image: rdepot-repo
         imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: 1Gi
+            cpu: 250m
         ports:
         - containerPort: 8080
         volumeMounts:

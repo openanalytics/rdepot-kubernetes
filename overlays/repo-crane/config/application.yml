@@ -1,0 +1,24 @@
+
+server:
+  port: 9080
+  
+app:
+  storage-location: /opt/rdepot/
+  openid-issuer-uri: https://keycloak.example.com/auth/realms/master
+  repositories:
+    - name: project1
+      is-public: true
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          crane:
+            client-secret: "${OAUTH2_CLIENT_SECRET}"
+            client-id: "${OAUTH2_CLIENT_ID}"
+            scope: openid
+        provider:
+          crane:
+            issuer-uri: https://keycloak.example.com/auth/realms/master
+

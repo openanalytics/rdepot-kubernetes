@@ -20,6 +20,10 @@ spec:
               name: web
           image: rdepot-app 
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: 2Gi
+              cpu: 250m
           volumeMounts:
             - name: app-config
               mountPath: /opt/rdepot/application.yml

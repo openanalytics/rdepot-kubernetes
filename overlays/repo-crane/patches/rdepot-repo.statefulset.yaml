@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rdepot-repo
+spec:
+  template:
+    spec:
+      containers:
+        - name: crane
+          ports:
+            - containerPort: 9080
+              name: http-crane
+          image: crane
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /opt/crane/application.yml
+              subPath: application.yml
+              name: crane-config
+            - name: repository
+              mountPath: /opt/rdepot
+          env:
+            - name: OAUTH2_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: crane-client-creds
+                  key: client-secret
+            - name: OAUTH2_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: crane-client-creds
+                  key: client-id
+      volumes:
+      - name: crane-config
+        configMap:
+          name: crane
+

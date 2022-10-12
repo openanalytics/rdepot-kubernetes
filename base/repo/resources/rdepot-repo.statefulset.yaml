@@ -22,6 +22,10 @@ spec:
         volumeMounts:
         - name: repository
           mountPath: /opt/rdepot
+        resources:
+          requests:
+            memory: 1Gi
+            cpu: 250m
       - name: rdepot-repo-proxy
         image: library/nginx:alpine
         imagePullPolicy: Always

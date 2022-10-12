@@ -1,0 +1,22 @@
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: rdepot-repo
+spec:
+  ports:
+    - name: http-crane
+      protocol: TCP
+      port: 80
+      targetPort: 9080
+    - name: http-api
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: rdepot-repo
+  clusterIP: None
+  type: ClusterIP
+  sessionAffinity: None
+status:
+  loadBalancer: {}
