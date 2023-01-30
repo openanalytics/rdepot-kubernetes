@@ -12,3 +12,6 @@ Images tagged `:latest` are also available, but their use is discouraged.
 
 The kustomizations in this repo are version-locked and are increased in tandem with a repository tag.
 
+---
+
+(c) Copyright Open Analytics NV, 2019-2023 - Apache License 2.0
