@@ -49,6 +49,12 @@ repository:
 #spring.mvc.view.prefix=/WEB-INF/pages/
 #spring.mvc.view.suffix=.jsp
 spring:
+  liquibase:
+    change-log: classpath:liquibase-changeLog.xml
+    url: jdbc:postgresql://oa-rdepot-db-simple:5432/rdepot
+    user: rdepot
+    password: mysecretpassword
+    enabled: true
   mvc:
     view:
       suffix: .html
