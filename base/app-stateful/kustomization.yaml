@@ -7,7 +7,7 @@ resources:
 images:
   - name: rdepot-app
     newName: openanalytics/rdepot-app
-    newTag: 1.7.0
+    newTag: 1.7.1
 
 configMapGenerator:
   - files:
