@@ -7,7 +7,9 @@ app:
   openid-issuer-uri: https://keycloak.example.com/auth/realms/master
   repositories:
     - name: project1
-      is-public: true
+      public: true
+    - name: project2
+      public: false
 
 spring:
   security:
