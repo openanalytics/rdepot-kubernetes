@@ -33,9 +33,10 @@ spec:
               name: rdepot-db-credentials
               key: password
         volumeMounts:
-          - name: app-data
-            mountPath: /opt/rdepot/generated
-            subPath: generated
+          # only necessary when repository-snaphosts is enabled
+          #- name: app-data
+            #mountPath: /opt/rdepot/generated
+            #subPath: generated
           - name: app-data
             mountPath: /opt/rdepot/repositories
             subPath: repositories
