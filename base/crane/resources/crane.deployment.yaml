@@ -8,6 +8,9 @@ spec:
       app: crane
   replicas: 1
   template:
+    metadata:
+      labels:
+        app: crane
     spec:
       containers:
         - name: crane
