@@ -23,8 +23,6 @@ spec:
             - mountPath: /opt/crane/application.yml
               subPath: application.yml
               name: crane-config
-            - name: repository
-              mountPath: /opt/rdepot
           env:
             - name: OAUTH2_CLIENT_SECRET
               valueFrom:
