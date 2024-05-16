@@ -1,12 +1,34 @@
+server:
+  servlet:
+    context-path: /server
+  error:
+    include-stacktrace: never
+    path: /error
+
+allowed-origin: https://my.domain.com
 
 declarative: false
 
-api-token:
-  secret: SecretKeyToGenJWTs
+access-token:
+  lifetime-default: 30
+  lifetime-configurable: true
+  length: 32
+  allowed-characters: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
 
-message:
-  source:
-    basename: i18n/messages
+generate-manuals: true
+
+repository-snapshots: false
+
+# Email related properties
+email:
+  password:
+  username:
+  from:
+  smtp:
+    host:
+    port:
+    auth:
+    starttls:
 
 # Database related properties
 db:
@@ -20,24 +42,22 @@ hibernate:
   dialect: org.hibernate.dialect.PostgreSQLDialect
   show_sql: false
 
+message:
+  source:
+    basename: i18n/messages
+
 entitymanager:
   packages:
     to:
-      scan: eu.openanalytics.rdepot.model
-
-# Email related properties
-email:
-  password:
-  username:
-  from:
-  smtp:
-    host:
-    port:
-    auth:
-    starttls:
+      scan:
+        - eu.openanalytics.rdepot.base.entities
+        - eu.openanalytics.rdepot.r.entities
+        - eu.openanalytics.rdepot.python.entities
 
 # Package upload related properties
 package:
+  version:
+    max-numbers: 10
   upload:
     dir: /opt/rdepot
 
@@ -46,57 +66,74 @@ repository:
   generation:
     dir: /opt/rdepot/generated
 
-#spring.mvc.view.prefix=/WEB-INF/pages/
-#spring.mvc.view.suffix=.jsp
 spring:
-  liquibase:
-    change-log: classpath:liquibase-changeLog.xml
-    url: jdbc:postgresql://oa-rdepot-db-simple:5432/rdepot
-    user: rdepot
-    password: mysecretpassword
-    enabled: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
   mvc:
     view:
       suffix: .html
   main:
     allow-bean-definition-overriding: true
-    log-startup-info: false  
-
+    log-startup-info: false
   output:
     ansi:
-      enabled: always    
-#spring.devtools.remote.secret=thisismysecret
-server:
-  error:
-    include-stacktrace: always
-    path: /error
-    
+      enabled: always
+  #Liquibase related properties
+  liquibase:
+    change-log: classpath:liquibase-changeLog.xml
+    url: jdbc:postgresql://oa-rdepot-db-simple:5432/rdepot
+    user: postgres
+    password: mysecretpassword
+    enabled: true
+
+error:
+  whitelabel:
+    enabled: false
+
 management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: "health"
+  endpoint:
+    health:
+      enabled: true
   metrics:
     web:
       server:
-        auto-time-requests: false
+        request:
+          autotime:
+            enabled: false
 
 springdoc:
+  pathsToMatch: /api/v2/**
+  api-docs:
+    path: /v2/api-docs
   swagger-ui:
-    path: /swagger-ui/api-docs.html
+    path: /docs/api.html
+    disable-swagger-default-url: true
+    url: /v2/api-docs
+    display-query-params: true
+  default-produces-media-type: application/json
 
 logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-4r [%t] %5p traceId=%X{traceIdMDC} %c{1} : %m %n"
   level:
+    liquibase:
+      parser: INFO
     org:
       springframework:
         web:
           filter:
-            CommonsRequestLoggingFilter: INFO   
+            CommonsRequestLoggingFilter: INFO
 
 #storage related properties
-localStorage:
-  maxRequestSize: 10
+local-storage:
+  max-request-size: 10
 
 storage:
   implementation: local
-
-requestTimeout: 10          
-
-#repo:            
-
