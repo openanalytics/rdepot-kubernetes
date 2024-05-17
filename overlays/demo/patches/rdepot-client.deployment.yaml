@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rdepot-client
+spec:
+  template:
+    spec:
+      containers:
+        - name: rdepot-client
+          env:
+            - name: VITE_LOGIN_SIMPLE
+              value: "true"
+            - name: VITE_LOGIN_OIDC
+              value: "false"
+            - name: VITE_URL_PREFIX
+              value: "/"
+            - name: VITE_SERVER_ADDRESS
+              value: "TO BE SPECIFIED"
+            - name: VITE_DEV_MODE
+              value: "false"

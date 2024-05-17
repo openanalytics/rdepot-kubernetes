@@ -5,7 +5,7 @@
 
 The demo provisions the following in a namespace:
 * 1 RDepot repository server *"demo"*
-* 1 RDepot manager app
+* 1 RDepot manager app which
 * 1 Postgres instance
 
 Minikube is recommended to run the demo, but other distributions of kubernetes should also work as long as dynamic volume provisioning is supported.

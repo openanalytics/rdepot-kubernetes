@@ -4,11 +4,10 @@ kind: Kustomization
 resources:
   - ../../base/app-stateful
 
-patchesStrategicMerge:
-  - patches/rdepot-app.statefulset.yaml
+patches:
+  - path: patches/rdepot-app.statefulset.yaml
 
 secretGenerator:
   - files:
       - secrets/authentication.yml
     name: rdepot-app-auth
-

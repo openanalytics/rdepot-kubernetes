@@ -2,12 +2,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - resources/rdepot-app.statefulset.yaml
-  - resources/rdepot-app.service.yaml
+  - resources/rdepot-client.deployment.yaml
+  - resources/rdepot-client.service.yaml
 
 images:
-  - name: rdepot-app
-    newName: openanalytics/rdepot-app
+  - name: rdepot-client
+    newName: openanalytics/rdepot-client
     newTag: 2.0.0
 
 configMapGenerator:

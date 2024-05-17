@@ -1,14 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
 resources:
-- ../../base/repo
+  - ../../base/repo
 
-patchesStrategicMerge:
-- patches/rdepot-repo.statefulset.yaml
-- patches/rdepot-repo.service.yaml
- 
+patches:
+  - path: patches/rdepot-repo.statefulset.yaml
+  - path: patches/rdepot-repo.service.yaml
+
 secretGenerator:
-- files:
-  - secrets/gatekeeper.yaml
-  name: gatekeeper-config
-
+  - files:
+      - secrets/gatekeeper.yaml
+    name: gatekeeper-config

@@ -4,9 +4,9 @@ kind: Kustomization
 resources:
   - ../../base/repo-api
 
-patchesStrategicMerge:
-  - patches/rdepot-repo.statefulset.yaml
-  - patches/rdepot-repo.service.yaml
+patches:
+  - path: patches/rdepot-repo.statefulset.yaml
+  - path: patches/rdepot-repo.service.yaml
 
 configMapGenerator:
   - files:
@@ -16,5 +16,4 @@ configMapGenerator:
 images:
   - name: crane
     newName: openanalytics/crane-snapshot
-    newTag: 0.2.0-SNAPSHOT-20230104.135749
-
+    newTag: 0.2.0-SNAPSHOT-20240206.10073

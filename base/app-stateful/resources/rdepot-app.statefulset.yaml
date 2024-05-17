@@ -15,11 +15,18 @@ spec:
     spec:
       containers:
         - name: rdepot-app
+          image: rdepot-app
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
               name: web
-          image: rdepot-app
-          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_URL
+              value: ""
+            - name: DB_USERNAME
+              value: ""
+            - name: DB_PASSWORD
+              value: ""
           resources:
             requests:
               memory: 2Gi
