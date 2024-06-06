@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rdepot
+  annotations:
+    nginx.ingress.kubernetes.io/session-cookie-name: route
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: rdepot.demo
+      http:
+        paths:
+          - path: /server(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: rdepot-app
+                port:
+                  number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rdepot-client
+                port:
+                  number: 80
+          - path: /repo(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: rdepot-repo
+                port:
+                  number: 80

@@ -15,6 +15,6 @@ spec:
             - name: VITE_URL_PREFIX
               value: "/"
             - name: VITE_SERVER_ADDRESS
-              value: "TO BE SPECIFIED"
+              value: "http://rdepot.demo/server"
             - name: VITE_DEV_MODE
               value: "false"

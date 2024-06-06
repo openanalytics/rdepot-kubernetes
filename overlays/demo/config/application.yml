@@ -1,8 +1,17 @@
 declarative: true
 repositories:
   - name: demo
-    publication-uri: http://rdepot-repo/repo/demo
+    publication-uri: http://rdepot.demo/repo/demo
     server-address: http://rdepot-repo:8080/demo
+
+allowed-origin: http://rdepot.demo
+
+api-token:
+  secret: SecretKeyToGenJWTs
+  issuer: RDepot
+  audience:
+    - RDepot
+  lifetime: 5000
 
 access-token:
   lifetime-default: 30

@@ -5,14 +5,15 @@ namespace: demo-rdepot
 resources:
   - ../../base/app-stateful
   - ../../base/repo
-  - ../../base/client-frontend
+  - ../../base/client-deployment
   - resources/rdepot-db.service.yaml
   - resources/rdepot-db.statefulset.yaml
+  - resources/rdepot.ingress.yaml
 
 patches:
   - path: patches/rdepot-app.statefulset.yaml
+  - path: patches/rdepot-client.deployment.yaml
   - path: patches/rdepot-repo.statefulset.yaml
-  - path: patches/rdepot-db-init.job.yaml
 
 configMapGenerator:
   - name: rdepot-app
