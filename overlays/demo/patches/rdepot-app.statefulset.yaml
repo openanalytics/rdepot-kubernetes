@@ -35,14 +35,20 @@ spec:
           volumeMounts:
             # only necessary when repository-snapshots is enabled
             #- name: app-data
-            #mountPath: /opt/rdepot/generated
-            #subPath: generated
+            #  mountPath: /opt/rdepot/generated
+            #  subPath: generated
             - name: app-data
               mountPath: /opt/rdepot/repositories
               subPath: repositories
             - name: app-config
               mountPath: /opt/rdepot/authentication.yml
               subPath: authentication.yml
+            - name: repositories-config
+              mountPath: /opt/rdepot/declared_repositories
+      volumes:
+        - name: repositories-config
+          configMap:
+            name: demo-repositories
   volumeClaimTemplates:
     - metadata:
         name: app-data

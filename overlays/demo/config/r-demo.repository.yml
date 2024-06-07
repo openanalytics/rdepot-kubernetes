@@ -1,0 +1,4 @@
+name: r-demo
+publicationUri: http://rdepot.demo/repo/r-demo
+serverAddress: http://rdepot-repo:8080/r-demo
+technology: R

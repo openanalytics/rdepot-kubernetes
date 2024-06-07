@@ -14,37 +14,36 @@ spec:
         app: rdepot-repo
     spec:
       containers:
-      - name: rdepot-repo
-        image: rdepot-repo
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8080
-        volumeMounts:
-        - name: repository
-          mountPath: /opt/rdepot
-        resources:
-          requests:
-            memory: 1Gi
-            cpu: 250m
-      - name: rdepot-repo-proxy
-        image: library/nginx:alpine
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: config-volume
-          mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.conf
-        - name: config-volume
-          mountPath: /etc/nginx/sites-enabled/rdepot
-          subPath: sites-enabled-rdepot
-        - name: repository
-          mountPath: /opt/rdepot/repo
-          readOnly: true
+        - name: rdepot-repo
+          image: rdepot-repo
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: repository
+              mountPath: /opt/rdepot
+          resources:
+            requests:
+              memory: 1Gi
+              cpu: 250m
+        - name: rdepot-repo-proxy
+          image: library/nginx:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+            - name: config-volume
+              mountPath: /etc/nginx/sites-enabled/rdepot
+              subPath: sites-enabled-rdepot
+            - name: repository
+              mountPath: /opt/rdepot/repo
+              readOnly: true
       volumes:
-      - name: config-volume
-        configMap:
-          name: rdepot-repo
-      - name: repository
-        emptyDir: {}
- 
+        - name: config-volume
+          configMap:
+            name: rdepot-repo
+        - name: repository
+          emptyDir: {}

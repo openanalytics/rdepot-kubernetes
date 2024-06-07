@@ -1,8 +1,8 @@
 declarative: true
-repositories:
-  - name: demo
-    publication-uri: http://rdepot.demo/repo/demo
-    server-address: http://rdepot-repo:8080/demo
+
+additional-repository-configs:
+  paths:
+    - /opt/rdepot/declared_repositories
 
 allowed-origin: http://rdepot.demo
 

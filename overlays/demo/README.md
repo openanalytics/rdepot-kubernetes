@@ -4,7 +4,7 @@
 *Important: this overlay is not recommended for production use.*
 
 The demo provisions the following in a namespace:
-* 1 RDepot repository server *"demo"*
+* 1 RDepot repository server
 * 1 RDepot manager app which is a backend
 * 1 RDepot client which is a frontend
 * 1 Postgres instance
@@ -18,8 +18,14 @@ minikube start
 minikube addons enable ingress
 ```
 
+Add the following entries to `/etc/hosts`, replacing MINIKUBE_IP by the output of `$ minkube ip` command:
 ```bash
-kubectl create ns demo-rdepot
+MINIKUBE_IP rdepot.demo
+```
+
+Then you are ready to deploy demo application.
+
+```bash
 # cd overlays/demo
 kustomize build . | kubectl apply -f -
 ```
@@ -29,22 +35,7 @@ wait until your pods are ready:
 kubectl -n demo-rdepot get pods
 ```
 
-## Port-forwarding the services
-
-To forward the Manager app, run
-```bash
-kubectl -n demo-rdepot port-forward svc/rdepot-app 8080:80
-```
-
-and point your browser at http://localhost:8080 (login `einstein`/`testpassword`)
-
-Make sure to publish your the demo repository from the *Repositories* page. 
-
-To forward the Repository web server, run
-```bash
-kubectl -n demo-rdepot port-forward svc/rdepot-repo 8081:80
-```
-and point your browser or R environment at http://localhost:8081/repo/demo
+Application will be available at http://rdepot.demo
 
 ## Teardown
 

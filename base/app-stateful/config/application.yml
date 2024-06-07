@@ -9,6 +9,16 @@ allowed-origin: https://my.domain.com
 
 declarative: false
 
+default-user-configuration:
+  language: en-US
+  theme: light
+  page-size: 10
+  supported-languages:
+    - en-US
+  supported-themes:
+    - light
+    - dark
+
 access-token:
   lifetime-default: 30
   lifetime-configurable: true
@@ -82,7 +92,6 @@ spring:
       enabled: always
   #Liquibase related properties
   liquibase:
-    change-log: classpath:liquibase-changeLog.xml
     url: jdbc:postgresql://oa-rdepot-db-simple:5432/rdepot
     user: postgres
     password: mysecretpassword
