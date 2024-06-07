@@ -18,7 +18,7 @@ minikube start
 minikube addons enable ingress
 ```
 
-Add the following entries to `/etc/hosts`, replacing MINIKUBE_IP by the output of `$ minkube ip` command:
+Add the following entries to `/etc/hosts`, replacing MINIKUBE_IP by the output of `$ minikube ip` command:
 ```bash
 MINIKUBE_IP rdepot.demo
 ```
