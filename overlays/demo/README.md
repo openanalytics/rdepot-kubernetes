@@ -40,7 +40,7 @@ Application will be available at http://rdepot.demo
 ## Teardown
 
 ```bash
-kubectl delete namespace demo-rdepot
+kubectl delete namespace rdepot-demo
 ```
 
 ```bash
