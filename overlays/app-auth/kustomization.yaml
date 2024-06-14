@@ -2,13 +2,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../base/app-stateful
+  - ../../base/app
 
-patchesStrategicMerge:
-  - patches/rdepot-app.statefulset.yaml
+patches:
+  - path: patches/rdepot-app.statefulset.yaml
 
 secretGenerator:
   - files:
       - secrets/authentication.yml
     name: rdepot-app-auth
-

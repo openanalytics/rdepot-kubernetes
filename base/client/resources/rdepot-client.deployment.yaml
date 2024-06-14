@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rdepot-client
+spec:
+  selector:
+    matchLabels:
+      app: rdepot-client
+  template:
+    metadata:
+      labels:
+        app: rdepot-client
+    spec:
+      containers:
+        - name: rdepot-client
+          image: rdepot-client
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+            - name: VITE_LOGIN_SIMPLE
+              value: "true"
+            - name: VITE_LOGIN_OIDC
+              value: "false"
+            - name: VITE_URL_PREFIX
+              value: "/"
+            - name: VITE_SERVER_ADDRESS
+              value: ""
+            - name: VITE_OIDC_AUTHORITY
+              value: ""
+            - name: VITE_OIDC_REDIRECT_URI
+              value: ""
+            - name: VITE_OIDC_CLIENT_ID
+              value: ""
+            - name: VITE_OIDC_POST_LOGOUT_REDIRECT_URI
+              value: ""
+            - name: VITE_OIDC_RESPONSE_TYPE
+              value: "code"
+            - name: VITE_OIDC_SCOPE
+              value: "openid profile email"
+            - name: VITE_CURRENT_COMMIT_VERSION
+              value: ""
+            - name: VITE_DEV_MODE
+              value: ""
+          resources:
+            limits:
+              cpu: 250m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi

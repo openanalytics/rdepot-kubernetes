@@ -1,0 +1,148 @@
+server:
+  servlet:
+    context-path: /server
+  error:
+    include-stacktrace: never
+    path: /error
+
+allowed-origin: https://my.domain.com
+
+declarative: false
+
+default-user-configuration:
+  language: en-US
+  theme: light
+  page-size: 10
+  supported-languages:
+    - en-US
+  supported-themes:
+    - light
+    - dark
+
+access-token:
+  lifetime-default: 30
+  lifetime-configurable: true
+  length: 32
+  allowed-characters: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+
+generate-manuals: true
+
+repository-snapshots: false
+
+# Email related properties
+email:
+  password:
+  username:
+  from:
+  smtp:
+    host:
+    port:
+    auth:
+    starttls:
+
+# Database related properties
+db:
+  driver: org.postgresql.Driver
+  url: jdbc:postgresql://oa-rdepot-db-simple:5432/rdepot
+  username: rdepot
+  password: mysecretpassword
+
+# Hibernate related properties
+hibernate:
+  dialect: org.hibernate.dialect.PostgreSQLDialect
+  show_sql: false
+
+message:
+  source:
+    basename: i18n/messages
+
+entitymanager:
+  packages:
+    to:
+      scan:
+        - eu.openanalytics.rdepot.base.entities
+        - eu.openanalytics.rdepot.r.entities
+        - eu.openanalytics.rdepot.python.entities
+
+# Package upload related properties
+package:
+  version:
+    max-numbers: 10
+  upload:
+    dir: /opt/rdepot
+
+# Repository generation related properties
+repository:
+  generation:
+    dir: /opt/rdepot/generated
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  mvc:
+    view:
+      suffix: .html
+  main:
+    allow-bean-definition-overriding: true
+    log-startup-info: false
+  output:
+    ansi:
+      enabled: always
+  #Liquibase related properties
+  liquibase:
+    url: jdbc:postgresql://oa-rdepot-db-simple:5432/rdepot
+    user: postgres
+    password: mysecretpassword
+    enabled: true
+
+error:
+  whitelabel:
+    enabled: false
+
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: "health"
+  endpoint:
+    health:
+      enabled: true
+  metrics:
+    web:
+      server:
+        request:
+          autotime:
+            enabled: false
+
+springdoc:
+  pathsToMatch: /api/v2/**
+  api-docs:
+    path: /v2/api-docs
+  swagger-ui:
+    path: /docs/api.html
+    disable-swagger-default-url: true
+    url: /v2/api-docs
+    display-query-params: true
+  default-produces-media-type: application/json
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-4r [%t] %5p traceId=%X{traceIdMDC} %c{1} : %m %n"
+  level:
+    liquibase:
+      parser: INFO
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: INFO
+
+#storage related properties
+local-storage:
+  max-request-size: 10
+
+storage:
+  implementation: local

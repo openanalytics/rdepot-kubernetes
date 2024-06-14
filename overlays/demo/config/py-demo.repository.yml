@@ -1,0 +1,4 @@
+name: py-demo
+publicationUri: http://rdepot.demo/repo/py-demo
+serverAddress: http://rdepot-repo:8080/py-demo
+technology: PYTHON

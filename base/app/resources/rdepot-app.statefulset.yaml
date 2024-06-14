@@ -15,11 +15,18 @@ spec:
     spec:
       containers:
         - name: rdepot-app
+          image: rdepot-app
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
               name: web
-          image: rdepot-app 
-          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_URL
+              value: ""
+            - name: DB_USERNAME
+              value: ""
+            - name: DB_PASSWORD
+              value: ""
           resources:
             requests:
               memory: 2Gi
@@ -28,15 +35,7 @@ spec:
             - name: app-config
               mountPath: /opt/rdepot/application.yml
               subPath: application.yml
-          env:
-            - name: DB_URL
-              value: ""
-            - name: DB_USERNAME
-              value: ""
-            - name: DB_PASSWORD
-              value: ""
       volumes:
         - name: app-config
           configMap:
             name: rdepot-app
-

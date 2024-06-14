@@ -10,4 +10,6 @@ app:
         password: testpassword
       - login: newton
         password: testpassword
-
+    default:
+      admins:
+        - einstein

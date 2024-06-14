@@ -6,49 +6,54 @@ spec:
   template:
     spec:
       containers:
-      - name: rdepot-app
-        env:
-        - name: SPRING_LIQUIBASE_URL
-          value: jdbc:postgresql://rdepot-db:5432/rdepot
-        - name: SPRING_LIQUIBASE_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: rdepot-db-credentials
-              key: username
-        - name: SPRING_LIQUIBASE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: rdepot-db-credentials
-              key: password
-        - name: DB_URL
-          value: jdbc:postgresql://rdepot-db:5432/rdepot
-        - name: DB_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: rdepot-db-credentials
-              key: username
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: rdepot-db-credentials
-              key: password
-        volumeMounts:
-          # only necessary when repository-snapshots is enabled
-          #- name: app-data
-            #mountPath: /opt/rdepot/generated
-            #subPath: generated
-          - name: app-data
-            mountPath: /opt/rdepot/repositories
-            subPath: repositories
-          - name: app-config
-            mountPath: /opt/rdepot/authentication.yml
-            subPath: authentication.yml
+        - name: rdepot-app
+          env:
+            - name: SPRING_LIQUIBASE_URL
+              value: jdbc:postgresql://rdepot-db:5432/rdepot
+            - name: SPRING_LIQUIBASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rdepot-db-credentials
+                  key: username
+            - name: SPRING_LIQUIBASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rdepot-db-credentials
+                  key: password
+            - name: DB_URL
+              value: jdbc:postgresql://rdepot-db:5432/rdepot
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: rdepot-db-credentials
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rdepot-db-credentials
+                  key: password
+          volumeMounts:
+            # only necessary when repository-snapshots is enabled
+            #- name: app-data
+            #  mountPath: /opt/rdepot/generated
+            #  subPath: generated
+            - name: app-data
+              mountPath: /opt/rdepot/repositories
+              subPath: repositories
+            - name: app-config
+              mountPath: /opt/rdepot/authentication.yml
+              subPath: authentication.yml
+            - name: repositories-config
+              mountPath: /opt/rdepot/declared_repositories
+      volumes:
+        - name: repositories-config
+          configMap:
+            name: demo-repositories
   volumeClaimTemplates:
     - metadata:
         name: app-data
       spec:
-        accessModes: [ "ReadWriteOnce" ]
+        accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-              storage: "1Gi"
-
+            storage: "1Gi"

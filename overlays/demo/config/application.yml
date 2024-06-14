@@ -1,16 +1,23 @@
 declarative: true
-repositories:
-  - name: demo
-    publication-uri: http://rdepot-repo/repo/demo
-    server-address: http://rdepot-repo:8080/demo
 
-api_token:
-  # generate your own secret
-  secret: Xeekuu1ohnguu4shiethao4Cuonooshu 
+additional-repository-configs:
+  paths:
+    - /opt/rdepot/declared_repositories
 
-message:
-  source:
-    basename: i18n/messages
+allowed-origin: http://rdepot.demo
+
+api-token:
+  secret: SecretKeyToGenJWTs
+  issuer: RDepot
+  audience:
+    - RDepot
+  lifetime: 5000
+
+access-token:
+  lifetime-default: 30
+  lifetime-configurable: true
+  length: 32
+  allowed-characters: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
 
 # Database related properties
 db:
@@ -18,16 +25,6 @@ db:
   url: jdbc:postgresql://oa-rdepot-db:5432/rdepot
   username: rdepot
   password: mysecretpassword
-
-# Hibernate related properties
-hibernate:
-  dialect: org.hibernate.dialect.PostgreSQLDialect
-  show_sql: false
-
-entitymanager:
-  packages:
-    to:
-      scan: eu.openanalytics.rdepot.model
 
 # Email related properties
 email:
@@ -50,42 +47,55 @@ repository:
   generation:
     dir: /opt/rdepot/generated
 
-#spring.mvc.view.prefix=/WEB-INF/pages/
-#spring.mvc.view.suffix=.jsp
 spring:
-  mvc:
-    view:
-      suffix: .html
-  main:
-    allow-bean-definition-overriding: true
-    log-startup-info: false  
+  liquibase:
+    enabled: true
 
-  output:
-    ansi:
-      enabled: always    
-#spring.devtools.remote.secret=thisismysecret
 server:
+  servlet:
+    context-path: /server
   error:
-    include-stacktrace: always
+    include-stacktrace: never
     path: /error
-    
+
 management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: "health"
+  endpoint:
+    health:
+      enabled: true
   metrics:
     web:
       server:
-        auto-time-requests: false
+        request:
+          autotime:
+            enabled: false
 
 springdoc:
+  pathsToMatch: /api/v2/**
+  api-docs:
+    path: /v2/api-docs
   swagger-ui:
-    path: /swagger-ui/api-docs.html
+    path: /docs/api.html
+    disable-swagger-default-url: true
+    url: /v2/api-docs
+    display-query-params: true
+  default-produces-media-type: application/json
 
 logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-4r [%t] %5p traceId=%X{traceIdMDC} %c{1} : %m %n"
   level:
+    liquibase:
+      parser: INFO
     org:
       springframework:
         web:
           filter:
-            CommonsRequestLoggingFilter: INFO   
+            CommonsRequestLoggingFilter: INFO
 
 #storage related properties
 localStorage:
@@ -93,6 +103,3 @@ localStorage:
 
 storage:
   implementation: local
-
-requestTimeout: 10
-

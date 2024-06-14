@@ -1,15 +1,23 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: rdepot-demo
+
+generatorOptions:
+  disableNameSuffixHash: true
+
 resources:
-  - ../../base/app-stateful
+  - resources/rdepot-demo.namespace.yaml
+  - ../../base/app
   - ../../base/repo
+  - ../../base/client
   - resources/rdepot-db.service.yaml
   - resources/rdepot-db.statefulset.yaml
+  - resources/rdepot.ingress.yaml
 
-patchesStrategicMerge:
-  - patches/rdepot-app.statefulset.yaml
-  - patches/rdepot-repo.statefulset.yaml
-  - patches/rdepot-db-init.job.yaml
+patches:
+  - path: patches/rdepot-app.statefulset.yaml
+  - path: patches/rdepot-client.deployment.yaml
+  - path: patches/rdepot-repo.statefulset.yaml
 
 configMapGenerator:
   - name: rdepot-app
@@ -17,12 +25,13 @@ configMapGenerator:
       - config/application.yml
       - config/authentication.yml
     behavior: replace
+  - name: demo-repositories
+    files:
+      - config/py-demo.repository.yml
+      - config/r-demo.repository.yml
 
 secretGenerator:
   - literals:
       - username=rdepot
       - password=rdepot123
     name: rdepot-db-credentials
-
-namespace: demo-rdepot
-

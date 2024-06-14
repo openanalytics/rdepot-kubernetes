@@ -1,7 +1,6 @@
-
 server:
   port: 9080
-  
+
 app:
   storage-location: /opt/rdepot/
   openid-issuer-uri: https://keycloak.example.com/auth/realms/master
@@ -23,4 +22,3 @@ spring:
         provider:
           crane:
             issuer-uri: https://keycloak.example.com/auth/realms/master
-
