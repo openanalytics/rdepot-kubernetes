@@ -14,7 +14,7 @@ spec:
       containers:
         - name: rdepot-client
           image: rdepot-client
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
           env:

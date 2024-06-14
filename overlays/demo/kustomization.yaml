@@ -7,9 +7,9 @@ generatorOptions:
 
 resources:
   - resources/rdepot-demo.namespace.yaml
-  - ../../base/app-stateful
+  - ../../base/app
   - ../../base/repo
-  - ../../base/client-deployment
+  - ../../base/client
   - resources/rdepot-db.service.yaml
   - resources/rdepot-db.statefulset.yaml
   - resources/rdepot.ingress.yaml

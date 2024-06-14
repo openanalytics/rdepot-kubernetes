@@ -16,7 +16,7 @@ spec:
       containers:
         - name: rdepot-app
           image: rdepot-app
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
               name: web

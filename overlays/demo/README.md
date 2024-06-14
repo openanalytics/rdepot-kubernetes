@@ -18,7 +18,9 @@ minikube start
 minikube addons enable ingress
 ```
 
-Add the following entries to `/etc/hosts`, replacing MINIKUBE_IP by the output of `$ minikube ip` command:
+This demo includes Ingress resource with associated domain: `rdepot.demo`. Therefore, to get access to RDepot, local DNS resolver has to be updated.
+
+For Linux - add the following entry to `/etc/hosts`, replacing MINIKUBE_IP by the output of `$ minikube ip` command:
 ```bash
 MINIKUBE_IP rdepot.demo
 ```
@@ -36,6 +38,8 @@ kubectl -n demo-rdepot get pods
 ```
 
 Application will be available at http://rdepot.demo
+
+In [this file](./config/authentication.yml) credentials for test users can be found.
 
 ## Teardown
 
