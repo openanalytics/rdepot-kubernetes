@@ -34,7 +34,7 @@ kustomize build . | kubectl apply -f -
 
 wait until your pods are ready:
 ```bash
-kubectl -n demo-rdepot get pods
+kubectl -n rdepot-demo get pods
 ```
 
 Application will be available at http://rdepot.demo
