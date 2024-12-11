@@ -7,4 +7,4 @@ resources:
 images:
   - name: rdepot-repo
     newName: openanalytics/rdepot-repo
-    newTag: 2.3.0
+    newTag: 2.4.1
