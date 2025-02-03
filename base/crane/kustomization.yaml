@@ -12,5 +12,5 @@ configMapGenerator:
 
 images:
   - name: crane
-    newName: openanalytics/crane-snapshot
-    newTag: 0.2.0-SNAPSHOT-20240206.10073
+    newName: openanalytics/crane
+    newTag: 1.0.0

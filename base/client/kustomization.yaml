@@ -11,4 +11,4 @@ resources:
 images:
   - name: rdepot-client
     newName: openanalytics/rdepot-client
-    newTag: 2.4.1
+    newTag: 2.5.0

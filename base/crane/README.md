@@ -1,10 +1,10 @@
 # Crane Standalone
 
-This base deploys [Crane Server](https://crane.rdepot.io). If you are looking to deploy crane together with the repository API, use the [repo-crane overlay](../../overlays/repo-crane/) instead.
+This base deploys [Crane Server](https://craneserver.net). If you are looking to deploy crane together with the repository API, use the [repo-crane overlay](../../overlays/repo-crane/) instead.
 
 Crane can serve artifacts authenticated under OAuth2. This includes, but is not limited to, R package repositories.
 
-Read more: https://crane.rdepot.io/latest/docs/server/#configuration
+Read more: https://craneserver.net/documentation/server/configuration/
 
 ## Dependencies
 

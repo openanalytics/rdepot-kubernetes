@@ -14,4 +14,4 @@ The kustomizations in this repo are version-locked and are increased in tandem w
 
 ---
 
-(c) Copyright Open Analytics NV, 2019-2023 - Apache License 2.0
+(c) Copyright Open Analytics NV, 2019-2025 - Apache License 2.0

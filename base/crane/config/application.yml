@@ -5,10 +5,12 @@ app:
   storage-location: s3://example-bucket
   openid-issuer-uri: https://keycloak.example.com/auth/realms/master
   repositories:
-    - name: project1
-      public: true
-    - name: project2
-      public: false
+    project1:
+      read-access:
+        public: true
+    project2:
+      read-access:
+        public: false
 
 spring:
   security:
