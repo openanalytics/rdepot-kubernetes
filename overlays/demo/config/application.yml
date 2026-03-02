@@ -19,6 +19,26 @@ access-token:
   length: 32
   allowed-characters: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
 
+app:
+  authentication: simple
+  simple:
+    users:
+      - login: einstein
+        password: testpassword
+        name: Albert Einstein
+      - login: tesla
+        password: testpassword
+        name: Nicolas Tesla
+      - login: galileo
+        password: testpassword
+        name: Galileo Galilei
+      - login: newton
+        password: testpassword
+        name: Isaac Newton
+    default:
+      admins:
+        - einstein
+
 # Database related properties
 db:
   driver: org.postgresql.Driver

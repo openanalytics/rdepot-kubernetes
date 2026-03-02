@@ -14,32 +14,32 @@ spec:
         app: rdepot-db
     spec:
       containers:
-      - name: postgresql
-        image: library/postgres:alpine
-        env:
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: rdepot-db-credentials
-              key: username
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: rdepot-db-credentials
-              key: password
-        ports:
-          - name: tcp-postgresql
-            containerPort: 5432
-        volumeMounts:
-          - name: data
-            mountPath: /var/lib/postgresql/data
+        - name: postgresql
+          image: postgres:15
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rdepot-db-credentials
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rdepot-db-credentials
+                  key: password
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - name: tcp-postgresql
+              containerPort: 5432
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
   volumeClaimTemplates:
     - metadata:
         name: data
       spec:
-        accessModes: [ "ReadWriteOnce" ]
+        accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-              storage: "1Gi"
-
-
+            storage: "1Gi"

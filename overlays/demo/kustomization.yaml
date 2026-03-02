@@ -23,7 +23,6 @@ configMapGenerator:
   - name: rdepot-app
     files:
       - config/application.yml
-      - config/authentication.yml
     behavior: replace
   - name: demo-repositories
     files:
